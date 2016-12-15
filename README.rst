@@ -47,14 +47,14 @@ If you want to use some of the classes and functions:
 	from simplehtml import HTML
 
 	css = '''
-		body {
-			background-color: white;
-		}
+	body {
+		background-color: white;
+	}
 
-		h1 {
-			color: black;
-			text-align: center;
-		}
+	h1 {
+		color: black;
+		text-align: center;
+	}
 	'''
 
 	html = HTML()
