@@ -45,7 +45,7 @@ If you want to use some of the classes and functions:
 .. code-block:: python
 
 	from simplehtml import HTML
-	
+
 	css = '''
 		body {
 			background-color: white;
@@ -70,7 +70,7 @@ Change Log
 -------------
 
 ========== ======= =============================
-2016-09-16 0.0.1   init
+2016-12-14 0.0.1   init
 ========== ======= =============================
 
 License
