@@ -11,6 +11,6 @@ python:
 #             - sox
 install: pip install -e .
 # command to run tests
-# script: cd tests && nosetests -v *.py
+script: cd tests && nosetests -v *.py
 # script: nosetests -v -w test/
-script: true
+# script: true

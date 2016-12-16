@@ -3,7 +3,7 @@
 from __future__ import print_function
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from socket import gethostname
-from Html5 import HTML, CSS
+from simplehtml import HTML, CSS
 
 
 class ServerHandler(BaseHTTPRequestHandler):
@@ -59,7 +59,7 @@ class ServerHandler(BaseHTTPRequestHandler):
 			html.iframe('//giphy.com/embed/4VCevEgXeYzwk', width=300)
 			html.h2('header')
 			html.p('another paragraph')
-			html.image('https://cdn.pixabay.com/photo/2014/03/29/09/17/cat-300572_1280.jpg', width=200)
+			html.img('https://cdn.pixabay.com/photo/2014/03/29/09/17/cat-300572_1280.jpg', width=200)
 			html.footer('<a href="https://github.com/walchko">my code</a>')
 
 			self.wfile.write(str(html))
@@ -83,13 +83,15 @@ class ServerHandler(BaseHTTPRequestHandler):
 def main():
 
 	try:
-		server = HTTPServer((gethostname(), 9000), ServerHandler)
+		# server = HTTPServer((gethostname(), 9000), ServerHandler)
+		server = HTTPServer(('127.0.0.1', 9000), ServerHandler)
 		print("server started")
 		server.serve_forever()
 
 	except KeyboardInterrupt:
 		print('main interrupt')
 		server.socket.close()
+		return
 
 
 if __name__ == '__main__':

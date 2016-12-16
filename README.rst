@@ -8,6 +8,7 @@ simplehtml
 	:target: https://pypi.python.org/pypi/simplehtml/
 	:alt: License
 
+A light weight html library to create web pages dynamically.
 
 Install
 -----------
