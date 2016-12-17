@@ -2,7 +2,7 @@
 
 from __future__ import print_function
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
-from socket import gethostname
+# from socket import gethostname
 from simplehtml import HTML, CSS
 
 

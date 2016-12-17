@@ -262,7 +262,6 @@ class HTML(Base):
 			t.create(data)
 			self.parts.insert(n, str(t))
 
-
 	def img(self, image, width=None, height=None):
 		"""
 		Insert an image with optional height and width parameters.
