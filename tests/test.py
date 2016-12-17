@@ -10,28 +10,20 @@ def test_headers():
 	html.h1('h1')
 	html.h2('h2')
 	html.h3('h3')
-
 	resp = str(html)
 
 	assert resp == ans
-	# assert True
 
 
 def test_text():
-	# ans = '<!DOCTYPE html><html><head><style></style></head><body><p>paragraph</p><footer>footer</footer></body></html>'
 	ans = '<!DOCTYPE html><html><head><style></style></head><body><p>parapraph</p><footer>footer</footer></body></html>'
+
 	html = HTML()
 	html.p('parapraph')
 	html.footer('footer')
-
 	resp = str(html)
-	# print('resp', resp)
-	# print('ans', ans)
-	# print(ans==resp)
-	# print(ans==ans2)
 
 	assert resp == ans
-	# assert True
 
 
 def test_imgs():
@@ -41,21 +33,23 @@ def test_imgs():
 	html.img('link', width=100, height=100)
 	html.iframe('link', width=100, height=100)
 	resp = str(html)
-	# print('resp', resp)
-	# print('ans', ans)
-	# print(ans==resp)
 
 	assert ans == resp
-	# assert True
 
-# def test_table():
-# 	ans = """
-# 	"""
 
-# 	data = readJson('test.json')
-# 	html = HTML()
-# 	html.table(data)
+def test_table():
+	ans = '<!DOCTYPE html><html><head><style></style></head><body><table><tr><td>hello</td><td>hi</td><td>ola</td></tr><tr><td>1</td><td>2</td><td>3</td></tr><tr><td>a</td><td>b</td><td>c</td></tr></table></body></html>'
 
-# 	resp = str(html)
+	info = {
+		'data': [
+			['hello', 'hi', 'ola'],
+			[1, 2, 3],
+			['a', 'b', 'c']
+		]
+	}
 
-# 	assert resp == ans
+	html = HTML()
+	html.table(info)
+	resp = str(html)
+
+	assert resp == ans

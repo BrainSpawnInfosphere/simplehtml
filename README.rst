@@ -36,12 +36,18 @@ If you want to use some of the classes and functions:
 
 .. code-block:: python
 
-	from simplehtml import HTML, readJson
+	from simplehtml import HTML
+
+	# make a simple table
+	data = [
+		['hello', 'hi', 'ola'],
+		[1, 2, 3],
+		['a', 'b', 'c']
+	]
 
 	html = HTML()
-	html.p('hi')
-
-	data = readJson('myfile.json')
+	html.table(data)
+	print html
 
 .. code-block:: python
 
