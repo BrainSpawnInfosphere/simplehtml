@@ -7,6 +7,10 @@ simplehtml
 .. image:: https://img.shields.io/pypi/l/simplehtml.svg
 	:target: https://pypi.python.org/pypi/simplehtml/
 	:alt: License
+.. image:: https://travis-ci.org/walchko/simplehtml.svg?branch=master
+	:target: https://travis-ci.org/walchko/simplehtml
+.. image:: https://api.codacy.com/project/badge/Grade/af6dc70daea843dc8d48c190a0076ccb
+	:target: https://www.codacy.com/app/kevin-walchko/simplehtml?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=walchko/simplehtml&amp;utm_campaign=Badge_Grade
 
 A light weight html library to create web pages dynamically.
 
