@@ -27,117 +27,19 @@ Example:
 	print html
 """
 
-
-class Base(object):
-	"""
-	This is the base class, not sure it is totally useful.
-	"""
-	def write(self, filename):
-		print('need to enable writing')
+from Table import Table
+from CSS import CSS
 
 
-class CSS(Base):
-	"""
-	This class helps with some html css parameters.
-	"""
-	@staticmethod
-	def basic():
-		"""
-		Returns a simple css.
-		"""
-		basic = """
-		body {
-			background-color: white;
-		}
-
-		h1 {
-			color: black;
-			text-align: center;
-		}
-
-		p {
-			font-family: verdana;
-			font-size: 20px;
-		}
-		"""
-		return basic
-
-	@staticmethod
-	def cssTable(color='#dddddd'):
-		"""
-		A simple table css that alternates the color of every other row by
-		a use defined color (the default is gray).
-		"""
-		css = """
-		table {
-			font-family: arial, sans-serif;
-			border-collapse: collapse;
-			width: 100%;
-			}
-		td, th {
-			border: 1px solid #dddddd;
-			text-align: left;
-			padding: 8px;
-		}
-		tr:nth-child(even) {
-			background-color: COLOR;
-		}"""
-		return css.replace('COLOR', color)
-
-	@staticmethod
-	def cssToolTip(width=200):
-		"""
-		Css parameters to have a nice tool tip popup box of a user defined
-		width (default is 200px).
-		"""
-		css = """
-		.tooltip {
-			position: relative;
-			display: inline-block;
-			border-bottom: 1px dotted black;
-		}
-
-		.tooltip .tooltiptext {
-			visibility: hidden;
-			width: TEXT_WIDTH;
-			background-color: #555;
-			color: #fff;
-			text-align: center;
-			border-radius: 6px;
-			padding: 5px 0;
-			position: absolute;
-			z-index: 1;
-			bottom: 125%;
-			left: 50%;
-			margin-left: TEXT_OFFSET;
-			opacity: 0;
-			transition: opacity 1s;
-		}
-
-		.tooltip .tooltiptext::after {
-			content: "";
-			position: absolute;
-			top: 100%;
-			left: 50%;
-			margin-left: -5px;
-			border-width: 5px;
-			border-style: solid;
-			border-color: #555 transparent transparent transparent;
-		}
-
-		.tooltip:hover .tooltiptext {
-			visibility: visible;
-			opacity: 1;
-		}
-		"""
-		css = css.replace('TEXT_WIDTH', str(width)+'px')
-		css = css.replace('TEXT_OFFSET', str(-width/2)+'px')
-		# css = css.replace('TEXT_WIDTH', '400px')
-		# css = css.replace('HALF_TEXT_WIDTH', '-400px')
-		return css
+# class Base(object):
+# 	"""
+# 	This is the base class, not sure it is totally useful.
+# 	"""
+# 	def write(self, filename):
+# 		print('need to enable writing')
 
 
-class HTML(Base):
+class HTML(object):
 	"""
 	This class handles the dynamic contruction of a web page.
 	"""
@@ -226,35 +128,6 @@ class HTML(Base):
 		if n:
 			self.parts.insert(n, '<link rel="stylesheet" href="{}}">'.format(css))
 
-	# def table(self, table, class_name=None):
-	# 	"""
-	# 	Create a simple table. The table info is passed in via an array of rows.
-	# 	"""
-	# 	# n = self.find('</style>')
-	# 	# if n:
-	# 	# 	if not self.table_css:
-	# 	# 		self.parts.insert(n, self.table_format.replace("COLOR", self.table_color))
-	# 	# 		self.table_css = True
-	#
-	# 	n = self.find('</body>')
-	# 	if n:
-	# 		if class_name:
-	# 			self.parts.insert(n, '<table class={}>'.format(class_name))
-	# 		else:
-	# 			self.parts.insert(n, '<table>')
-	# 		# offset = 1
-	# 		for offset, line in enumerate(table):
-	# 			# self.parts.insert(n+offset, ''.join(map(str, line)))
-	# 			s = map(str, line)
-	# 			# self.parts.insert(n+offset, ''.join())
-	# 			l = '<tr>'
-	# 			for i in s:
-	# 				l += '<td>' + i + '</td>'
-	# 			l += '</tr>'
-	# 			self.parts.insert(n+offset+1, l)
-	# 			# offset += 1
-	# 		self.parts.insert(n+offset+2, '</table>')
-
 	def table(self, data):
 		n = self.find('</body>')
 		if n:
@@ -300,9 +173,7 @@ class HTML(Base):
 		"""
 		Returns a string of all of the html elements in the page.
 		"""
-		# print self.parts
 		return ''.join(self.parts)
-		# return str(self.parts)
 
 	def __repr__(self):
 		"""
@@ -310,64 +181,10 @@ class HTML(Base):
 		"""
 		return self.__str__()
 
-
-class Table(object):
-	"""
-	Create a simple table from a json object.
-
-	info = {
-		"header": [5, 6, 7],
-		"data": [
-			["hello", "hi", "ola"],
-			[1, 2, 3],
-			["a", "b", "c"]
-		],
-		'class': 'my_cool_class'
-	}
-
-	t = Table()
-	t.create(info)
-	print t
-	"""
-	table = []
-
-	def create(self, data):
-		"""
-		Create a simple table from a json object.
-		"""
-		if 'class' in data:
-			self.table.append('<table class={}>'.format(data['class']))
-		else:
-			self.table.append('<table>')
-
-		if 'header' in data:
-			self.table.append('<tr>')
-			for hdr in data['header']:
-				s = str(hdr)
-				self.table.append('<th>' + s + '</th>')
-			self.table.append('</tr>')
-
-		for line in data['data']:
-			s = map(str, line)
-			l = '<tr>'
-			for i in s:
-				l += '<td>' + i + '</td>'
-			l += '</tr>'
-			self.table.append(l)
-		self.table.append('</table>')
-
-	def __str__(self):
-		"""
-		Returns a string of all of the html elements in the page.
-		"""
-		return ''.join(self.table)
-
-	def __repr__(self):
-		"""
-		Returns a string of all of the html elements in the page.
-		"""
-		return self.__str__()
+	def write(self, filename):
+		with open(filename, 'w') as f:
+			f.write(self.__str__())
 
 
-if __name__ == '__main__':
-	print 'hello'
+# if __name__ == '__main__':
+# 	print 'hello'

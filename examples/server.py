@@ -9,6 +9,8 @@ from simplehtml import HTML, CSS
 class ServerHandler(BaseHTTPRequestHandler):
 	"""
 	"""
+	webpage = 'not ready'
+
 	def do_GET(self):
 		# print 'connection from:', self.address_string()
 
@@ -21,48 +23,7 @@ class ServerHandler(BaseHTTPRequestHandler):
 			self.send_header('Content-type', 'text/html')
 			self.end_headers()
 
-			css = """
-				body {
-					background-color: white;
-				}
-
-				h1 {
-					color: black;
-					text-align: center;
-				}
-
-				p {
-					font-family: verdana;
-					font-size: 20px;
-				}
-
-				a:link {
-					color: gray;
-				}
-
-				a:visited {
-					color: gray;
-				}
-
-				a:hover {
-					color: white;
-				}
-			"""
-			css += CSS.cssTable()
-			css += CSS.cssToolTip(400)  # set tooltip box width 400px
-
-			html = HTML()
-			html.css(css)
-			html.linuxFont()
-			html.h1('My Page')
-			html.p('hello ... ')
-			html.iframe('//giphy.com/embed/4VCevEgXeYzwk', width=300)
-			html.h2('header')
-			html.p('another paragraph')
-			html.img('https://cdn.pixabay.com/photo/2014/03/29/09/17/cat-300572_1280.jpg', width=200)
-			html.footer('<a href="https://github.com/walchko">my code</a>')
-
-			self.wfile.write(str(html))
+			self.wfile.write(self.webpage)
 			return
 
 		elif self.path.find('/json') > 0:
@@ -82,14 +43,58 @@ class ServerHandler(BaseHTTPRequestHandler):
 
 def main():
 
+	css = """
+		body {
+			background-color: white;
+		}
+
+		h1 {
+			color: black;
+			text-align: center;
+		}
+
+		p {
+			font-family: verdana;
+			font-size: 20px;
+		}
+
+		a:link {
+			color: gray;
+		}
+
+		a:visited {
+			color: gray;
+		}
+
+		a:hover {
+			color: white;
+		}
+	"""
+	css += CSS.cssTable()
+	css += CSS.cssToolTip(400)  # set tooltip box width 400px
+
+	html = HTML()
+	html.css(css)
+	html.linuxFont()
+	html.h1('My Page')
+	html.p('hello ... ')
+	html.iframe('http://giphy.com/embed/4VCevEgXeYzwk', width=300)
+	html.h2('header')
+	html.p('another paragraph')
+	html.img('https://cdn.pixabay.com/photo/2014/03/29/09/17/cat-300572_1280.jpg', width=200)
+	html.footer('<a href="https://github.com/walchko">my code</a>')
+
 	try:
-		# server = HTTPServer((gethostname(), 9000), ServerHandler)
 		server = HTTPServer(('127.0.0.1', 9000), ServerHandler)
-		print("server started")
+
+		# set static webpage
+		ServerHandler.webpage = str(html)  # you could change this to read a file
+
+		print("<<<<<<<< server started >>>>>>>>>")
 		server.serve_forever()
 
 	except KeyboardInterrupt:
-		print('main interrupt')
+		print('<-------- Keyboard interrupt -------->')
 		server.socket.close()
 		return
 
