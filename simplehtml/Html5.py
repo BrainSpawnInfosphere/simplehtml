@@ -28,7 +28,7 @@ Example:
 """
 
 from Table import Table
-from CSS import CSS
+# from CSS import CSS
 
 
 # class Base(object):
@@ -107,6 +107,16 @@ class HTML(object):
 		if n:
 			self.parts.insert(n, '<h3>{}</h3>'.format(string))
 
+	def div(self, string):
+		"""
+		division
+
+		TODO: should I add a class option?
+		"""
+		n = self.find('</body>')
+		if n:
+			self.parts.insert(n, '<div>{}</div>'.format(string))
+
 	def p(self, string):
 		"""
 		paragraph
@@ -126,7 +136,7 @@ class HTML(object):
 	def cssLink(self, css):
 		n = self.find('</head>')
 		if n:
-			self.parts.insert(n, '<link rel="stylesheet" href="{}}">'.format(css))
+			self.parts.insert(n, '<link rel="stylesheet" href="{}">'.format(css))
 
 	def table(self, data):
 		n = self.find('</body>')

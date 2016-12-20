@@ -1,5 +1,6 @@
 import os
-from setuptools import setup, find_packages
+from setuptools import setup
+# from setuptools import find_packages
 from simplehtml import __version__ as VERSION
 from setuptools.command.test import test as TestCommand
 
@@ -30,6 +31,7 @@ class CleanCommand(TestCommand):
 	def run_tests(self):
 		print('Cleanning up ...')
 		os.system('rm -fr simplehtml.egg-info dist build')
+
 
 readme = open('README.rst').read()
 

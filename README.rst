@@ -12,7 +12,9 @@ simplehtml
 .. image:: https://api.codacy.com/project/badge/Grade/af6dc70daea843dc8d48c190a0076ccb
 	:target: https://www.codacy.com/app/kevin-walchko/simplehtml?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=walchko/simplehtml&amp;utm_campaign=Badge_Grade
 
-A light weight html library to create web pages dynamically.
+A light weight html library to create web pages dynamically. This is used in
+some of my embedded applications to save me from reinventing the wheel over and
+over.
 
 Install
 -----------
@@ -36,27 +38,37 @@ Development
 Usage
 ---------
 
-If you want to use some of the classes and functions:
+To build a webpage with a simple table on it, do:
 
 .. code-block:: python
 
-	from simplehtml import HTML
+	from simplehtml import HTML, CSS
 
 	# make a simple table
-	data = [
-		['hello', 'hi', 'ola'],
-		[1, 2, 3],
-		['a', 'b', 'c']
-	]
+	data = {
+		"header": [5, 6, 7],  # optional table header
+		"data": [
+			["hello", "hi", "ola"],
+			[1, 2, 3],
+			["a", "b", "c"]
+		]
+	}
 
 	html = HTML()
+	html.css(CSS.cssTable())  # make the table look pretty
+	html.h1('My awesome table')
 	html.table(data)
 	print html
 
+To just create a simple webpage, you can just call standard tags like ``h1``,
+``h2``, ``img``, etc and create a page. Note, only a small (common?) selection
+of tags is supported.
+
 .. code-block:: python
 
 	from simplehtml import HTML
 
+	# create your own css
 	css = '''
 	body {
 		background-color: white;
@@ -72,7 +84,7 @@ If you want to use some of the classes and functions:
 	html.css(css)
 	html.h1('Welcome to my page')
 	html.img('mypic.jpg')
-	html.p('this is a paragraph about me')
+	html.p('this is a paragraph')
 	html.p('this is another paragraph')
 	html.footer('<a href="https://github.com/walchko">my code</a>')
 	print html
@@ -81,6 +93,7 @@ Change Log
 -------------
 
 ========== ======= =============================
+2016-12-20 0.2.0   better table support and cleanup
 2016-12-14 0.0.1   init
 ========== ======= =============================
 
