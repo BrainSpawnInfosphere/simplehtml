@@ -52,13 +52,11 @@ setup(
 		'Operating System :: POSIX :: Linux',
 		'Operating System :: MacOS :: MacOS X',
 		'Operating System :: POSIX',
-		# 'Topic :: Scientific/Engineering',
-		# 'Topic :: Scientific/Engineering :: Artificial Intelligence',
-		# 'Topic :: Scientific/Engineering :: Image Recognition',
-		# 'Topic :: Software Development :: Libraries :: Python Modules',
+		'Topic :: Internet :: WWW/HTTP :: Dynamic Content'
+		'Topic :: Software Development :: Libraries :: Python Modules',
 	],
 	install_requires=[
-		'requests',
+		# 'requests',
 		'simplejson'
 	],
 	url="https://github.com/walchko/simplehtml",

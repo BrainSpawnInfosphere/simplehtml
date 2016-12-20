@@ -3,8 +3,7 @@ __version__ = '0.2.0'
 from Html5 import HTML
 from CSS import CSS
 from Table import Table
-# from pwn import readJson, writeJson, isBreach
-# from server import PwmThread, ServerHandler
+
 try:
 	import simplejson as json
 except:

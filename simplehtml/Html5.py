@@ -28,7 +28,6 @@ Example:
 """
 
 from Table import Table
-# from CSS import CSS
 
 
 # class Base(object):
@@ -194,7 +193,3 @@ class HTML(object):
 	def write(self, filename):
 		with open(filename, 'w') as f:
 			f.write(self.__str__())
-
-
-# if __name__ == '__main__':
-# 	print 'hello'
