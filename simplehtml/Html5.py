@@ -42,8 +42,12 @@ class HTML(object):
 	"""
 	This class handles the dynamic contruction of a web page.
 	"""
-	def __init__(self):
+	def __init__(self, bgcolor=None):
 		self.clear()
+		if bgcolor:
+			n = self.find('</style>')
+			if n:
+				self.parts.insert(n, 'body {background-color:' + str(bgcolor) + ';}')
 
 	def clear(self):
 		"""
@@ -51,14 +55,10 @@ class HTML(object):
 		"""
 		self.parts = ['<!DOCTYPE html>', '<html>', '<head>', '<style>', '</style>', '</head>', '<body>', '</body>', '</html>']
 
-	def css(self, css, bgcolor=None):
+	def css(self, css):
 		"""
 		Given a css, it inserts it into the header of the html page.
 		"""
-		if bgcolor:
-			n = self.find('</style>')
-			if n:
-				self.parts.insert(n, 'body {background-color: {};}'.format(bgcolor))
 		if css:
 			n = self.find('</style>')
 			if n:
@@ -76,6 +76,14 @@ class HTML(object):
 	@staticmethod
 	def tooltip(text, popup_text):
 		return '<div class="tooltip">{}<span class="tooltiptext">{}</span></div>'.format(text, popup_text)
+
+	def hr(self):
+		"""
+		Inserts a horizontal line (<hr>).
+		"""
+		n = self.find('</body>')
+		if n:
+			self.parts.insert(n, '<hr>')
 
 	def linuxFont(self):
 		n = self.find('</head>')
@@ -176,6 +184,7 @@ class HTML(object):
 		"""
 		n = self.find('</body>')
 		if n:
+			# self.parts.insert(n, '<hr>')
 			self.parts.insert(n, '<footer>{}</footer>'.format(string))
 
 	def __str__(self):
