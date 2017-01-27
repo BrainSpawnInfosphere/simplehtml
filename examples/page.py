@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from __future__ import print_function
-from simplehtml import HTML, CSS
+from simplehtml import HTML
 
 
 def main():
@@ -64,7 +64,7 @@ def main():
 	# html.css('img {max-width: 100%;}')
 	html.css('h1 {text-align: center;}')
 	html.css('img {display: block; margin: 0 auto;}')
-	html.css(CSS.cssTable())
+	# html.css(CSS.cssTable())
 
 	# html.img('https://botsofwesteros.files.wordpress.com/2012/06/banner.jpg', width='100%')
 	html.img('https://upload.wikimedia.org/wikipedia/en/a/a6/Bender_Rodriguez.png', width='200px')

@@ -1,7 +1,9 @@
-__version__ = '0.2.0'
+__version__ = '0.4.0'
 
-from Html5 import HTML
-from CSS import CSS
+from Html5 import HTML5
+# from CSS import CSS
+from CSS import cssStripedTable
+from CSS import cssToolTip
 from Table import Table
 
 try:

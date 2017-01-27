@@ -38,7 +38,7 @@ from Table import Table
 # 		print('need to enable writing')
 
 
-class HTML(object):
+class HTML5(object):
 	"""
 	This class handles the dynamic contruction of a web page.
 	"""
@@ -69,7 +69,7 @@ class HTML(object):
 		for tag in self.parts:
 			if tag == token:
 				return cnt
-				break
+				# break
 			cnt += 1
 		return None
 
@@ -114,23 +114,27 @@ class HTML(object):
 		if n:
 			self.parts.insert(n, '<h3>{}</h3>'.format(string))
 
-	def div(self, string):
+	def div(self, string, classname=None):
 		"""
 		division
-
-		TODO: should I add a class option?
 		"""
 		n = self.find('</body>')
 		if n:
-			self.parts.insert(n, '<div>{}</div>'.format(string))
+			if classname:
+				self.parts.insert(n, '<div class="{}">{}</div>'.format(classname, string))
+			else:
+				self.parts.insert(n, '<div>{}</div>'.format(string))
 
-	def p(self, string):
+	def p(self, string, classname=None):
 		"""
 		paragraph
 		"""
 		n = self.find('</body>')
 		if n:
-			self.parts.insert(n, '<p>{}</p>'.format(string))
+			if classname:
+				self.parts.insert(n, '<p class="{}">{}</p>'.format(classname, string))
+			else:
+				self.parts.insert(n, '<p>{}</p>'.format(string))
 
 	def javascript(self, code):
 		"""
@@ -144,6 +148,11 @@ class HTML(object):
 		n = self.find('</head>')
 		if n:
 			self.parts.insert(n, '<link rel="stylesheet" href="{}">'.format(css))
+
+	def head(self, code):
+		n = self.find('</head>')
+		if n:
+			self.parts.insert(n, code)
 
 	def table(self, data):
 		n = self.find('</body>')
