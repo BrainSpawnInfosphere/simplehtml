@@ -102,6 +102,7 @@
 
 
 class cssStripedTable(object):
+	@staticmethod
 	def get(self, color='#dddddd'):
 		"""
 		A simple table css that alternates the color of every other row by
@@ -125,7 +126,8 @@ class cssStripedTable(object):
 
 
 class cssToolTip(object):
-	def get(self, width=200):
+	@staticmethod
+	def get(width=200):
 		"""
 		Css parameters to have a nice tool tip popup box of a user defined
 		width (default is 200px).
